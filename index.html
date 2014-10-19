@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="$views/css/image.css">
+        <link rel="stylesheet" href="$views/css/list.css">
+        <link rel="stylesheet" href="$views/css/buttons.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="index" class="section">
+                <h1>Last.fm Radio Playlisting</h1>
+                Enter login information, enter station url, click tune.
+                <h2>Last.fm login</h2>
+                <table>
+                  <tr><td>Username:</td><td>
+                    <input type="text" id="lfmUsername"/>
+                  </td></tr>
+                  <tr><td>Password:</td><td>
+                    <input type="password" id="lfmPassword"/>
+                  </td></tr>
+                  <tr><td colspan="2" align="right">
+                    <label><input type="checkbox" id="lfmSaveCredentials"/>Save my login credentials as a cookie inside Spotify</label>
+                  </td></tr>
+                </table>
+                <h2>Enter Station URL</h2>
+                <input type="text" id="stationUrl" value="lastfm://user/JRoar/mix"/>
+
+                <input type="submit" id="tune" value="Tune!"/>
+
+                <h2>Playlist</h2>
+                <div id="playlist"></div>
+            </div>
+        </div>
+        <script src="/js/jquery-2.1.1.min.js"></script>
+        <script src="/js/cookie.js"></script>
+        <script src="/js/lastfm.api.js"></script>
+        <script src="/js/lastfm.api.md5.js"></script>
+        <script src="/js/lfm-radio.js"></script>
+    </body>
+</html>
