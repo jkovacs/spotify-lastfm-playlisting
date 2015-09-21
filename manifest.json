@@ -24,5 +24,7 @@
   "SupportedLanguages": [
     "en"
   ],
-  "VendorIdentifier": "de.umass"
+  "VendorIdentifier": "de.umass",
+  "RequiredPermissions": [ "http://*.last.fm" ]
+
 }

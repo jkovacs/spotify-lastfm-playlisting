@@ -10,22 +10,25 @@
         <div id="wrapper">
             <div id="index" class="section">
                 <h1>Last.fm Radio Playlisting</h1>
-                Enter login information, enter station url, click tune.
-                <h2>Last.fm login</h2>
+                <h3>Enter user name, select station, click tune.</h3>
                 <table>
-                  <tr><td>Username:</td><td>
-                    <input type="text" id="lfmUsername"/>
-                  </td></tr>
-                  <tr><td>Password:</td><td>
-                    <input type="password" id="lfmPassword"/>
-                  </td></tr>
-                  <tr><td colspan="2" align="right">
-                    <label><input type="checkbox" id="lfmSaveCredentials"/>Save my login credentials as a cookie inside Spotify</label>
-                  </td></tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td>
+                            <input type="text" id="lfmUsername"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Station:</td>
+                        <td>
+                            <select id="station">
+                                <option value="library">Library</option>
+                                <option value="mix">Mix</option>
+                                <option value="recommended">Recommendations</option>
+                            </select>
+                        </td>
+                    </tr>
                 </table>
-                <h2>Enter Station URL</h2>
-                <input type="text" id="stationUrl" value="lastfm://user/JRoar/mix"/>
-
                 <input type="submit" id="tune" value="Tune!"/>
 
                 <h2>Playlist</h2>
