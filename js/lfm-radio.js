@@ -6,6 +6,17 @@ require([
         '$views/list#List',
         '$views/buttons'
     ], function (config, models, Search, Image, List, buttons) {
+        function searchTrack(artist, track) {
+            var promise = new models.Promise();
+            var search = Search.search(artist + " " + track);
+            search.tracks.snapshot(0, 1).done(function (result) {
+                promise.setDone(result.get(0));
+            }).fail(function (f) {
+                promise.setFail(f);
+            });
+            return promise;
+        }
+
         function startPlaylist(result) {
             var tracks = result.playlist;
             console.log("playlist:", tracks);
@@ -14,26 +25,20 @@ require([
                 playlist.load('tracks').done(function (playlist) {
                     playlist.tracks.clear();
                     var trackPromises = tracks.map(function (track) {
-                        // Array.prototype.find() not supported by spotify
-                        var spotifyPlaylink = track.playlinks.filter(function (l) {
-                            return l['affiliate'] == 'spotify';
-                        });
-                        url = spotifyPlaylink.length == 1 ? spotifyPlaylink[0].url : 0;
-                        return models.Track.fromURI(url)
+                        return searchTrack(track.artists[0].name, track.name);
                     });
-                    console.log(trackPromises);
-                    playlist.tracks.add.apply(
-                        playlist.tracks,
-                        trackPromises.filter(function (t) {
-                            return t !== null;
-                        })
-                    ).done(function () {
+                    new models.Promise.join(trackPromises).done(function (tracks) {
+                        playlist.tracks.add.apply(
+                            playlist.tracks,
+                            tracks.filter(function (f) { return f !== null; })
+                        ).done(function () {
                             var list = List.forPlaylist(playlist);
                             $('#playlist').html(list.node);
                             list.init();
 
                             models.player.playContext(playlist);
                         });
+                    });
                 });
             });
         }
