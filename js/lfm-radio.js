@@ -44,7 +44,7 @@ require([
         }
 
         function tune(username, station) {
-            var url = 'http://www.last.fm/player/station/user/' + username + '/' + station;
+            var url = 'http://cors-anywhere.herokuapp.com/https://www.last.fm/player/station/user/' + username + '/' + station;
             $.ajax(url).done(startPlaylist);
         }
 
